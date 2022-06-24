@@ -35,6 +35,12 @@ const testData: ColumnProps[] = [
     description: "啊实打实大苏打实打实打算",
     avatar: logo,
   },
+  {
+    id: 5,
+    title: "test5专栏",
+    description: "啊实打实大苏打实打实打算",
+    avatar: logo,
+  },
 ];
 const currentUser: UserProps = {
   isLogin: true,
