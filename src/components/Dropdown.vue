@@ -13,24 +13,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, watch } from "vue";
+import { useClickOutside } from "@/hooks/useClickOutside";
 defineProps<{ title: string }>();
 const isOpen = ref(false);
 const dropdownRef = ref<null | HTMLElement>(null);
 const toggleOpen = () => {
   isOpen.value = !isOpen.value;
 };
-const handler = (e: MouseEvent) => {
-  if (dropdownRef.value) {
-    if (!dropdownRef.value.contains(e.target as HTMLElement) && isOpen.value) {
-      isOpen.value = false;
-    }
+const isClickOutside = useClickOutside(dropdownRef);
+
+watch(isClickOutside, () => {
+  if (isOpen.value && isClickOutside.value) {
+    isOpen.value = false;
   }
-};
-onMounted(() => {
-  document.addEventListener("click", handler);
-});
-onUnmounted(() => {
-  document.removeEventListener("click", handler);
 });
 </script>
